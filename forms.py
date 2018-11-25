@@ -3,9 +3,15 @@ import wtforms
 import datetime
 
 class PostForm(FlaskForm):
-    post_text = wtforms.TextAreaField('Post')
-    username = wtforms.TextField('Username')
+    # TODO 
+    # need a unique post ID
+    post_text = wtforms.TextAreaField('Post',
+        [wtforms.validators.DataRequired('Post field can not be empty.'),
+         wtforms.validators.Length(400)])
+
+    username = wtforms.TextField('Username',
+        [wtforms.validators.DataRequired('Username field can not be empty.')])
+
     current_time = datetime.datetime.now()
-    print(current_time)
 
     submit = wtforms.SubmitField('Submit')

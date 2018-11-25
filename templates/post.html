@@ -2,8 +2,12 @@
 <html>
     <body>
         <h2>Post Form</h2>
+
+        {% for message in form.post_text.errors %}
+            {{ message }}
+        {% endfor %}
             
-        <form action = "http://localhost:5000/contact" method = post>
+        <form action = "http://localhost:5000/post" method = post>
             <fieldset>
                 <legend>Post Form</legend>
                 {{ form.hidden_tag() }}
