@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <body>
+        <h2>Post Form</h2>
+            
+        <form action = "http://localhost:5000/contact" method = post>
+            <fieldset>
+                <legend>Post Form</legend>
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold;>
+                    {{ form.username.label }}<br>
+                    {{ form.username }}
+                    </br>
+
+                    {{ form.post_text.label }}<br>
+                    {{ form.post_text }}
+                    </br>
+
+                    {{ form.submit }}
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>

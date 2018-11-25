@@ -13,11 +13,12 @@ create_profile_query = ('CREATE TABLE IF NOT EXISTS profile ('
     'b_date date NOT NULL,'
     'friends_list int,'
     'PRIMARY KEY(profile_id),'
-    'UNIQUE(email) );')
+    'UNIQUE(email, u_name) );')
 
 
 create_post_query = ('CREATE TABLE IF NOT EXISTS POST('
     'post_id int NOT NULL,'
+    'text varchar(400) NOT NULL,'
     'time_stamp timestamp,'
     'poster_id int NOT NULL,'
     'likes_list int,'
