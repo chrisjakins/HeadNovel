@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Profile Form{% endblock %}</h2>
+
+{% for message in form.username.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.password_text.errors %}
+    {{ message }}
+{% endfor %}
+    
+<form action = "http://localhost:5000/profile" method = profile>
+    <fieldset>
+        <legend>Profile Form</legend>
+        {{ form.hidden_tag() }}
+
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.username.label }}<br>
+            {{ form.username }}
+            </br>
+
+            {{ form.password_text.label }}<br>
+            {{ form.password_text }}
+            </br> 
+
+            {{ form.email.label }}<br>
+            {{ form.email }}
+            </br>
+
+            {{ form.firstName.label }}<br>
+            {{ form.firstName }}
+            </br> 
+
+            {{ form.lastName.label }}<br>
+            {{ form.lastName }}
+            </br> 
+
+            {{ form.phoneNum.label }}<br>
+            {{ form.phoneNum }}
+            </br> 
+
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

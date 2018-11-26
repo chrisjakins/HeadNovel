@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<h2>{% block title %}Message Form{% endblock %}</h2>
+ 
+{% for message in form.receiver_username.errors %}
+    {{ message }}
+{% endfor %}
+ 
+{% for message in form.message_text.errors %}
+    {{ message }}
+{% endfor %}
+ 
+<form action = "http://localhost:5000/message" method = message>
+    <fieldset>
+        <legend>Message Form</legend>
+        {{ form.hidden_tag() }}
+ 
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.receiver_username.label }}<br>
+            {{ form.receiver_username }}
+            </br>
+ 
+            {{ form.message_text.label }}<br>
+            {{ form.message_text }}
+            </br>
+ 
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
