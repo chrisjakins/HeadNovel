@@ -11,6 +11,18 @@ class PostForm(FlaskForm):
 
     username = wtforms.TextField('Username',
         [wtforms.validators.DataRequired('Username field can not be empty.')])
+    current_time = datetime.datetime.now()
+
+    submit = wtforms.SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    # TODO
+    # unique ID to post commented on
+    comment_text = wtforms.TextAreaField('Comment', 
+        [wtforms.validators.DataRequired('Comment field can not be empty.'), 
+         wtforms.validators.Length(max = 400)])
+    username = wtforms.TextField('Username',
+        [wtforms.validators.DataRequired('Username field can not be empty.')])
 
     current_time = datetime.datetime.now()
 

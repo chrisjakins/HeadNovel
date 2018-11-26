@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <body>
+        <h2> Post Form</h2>
+
+        {% for message in form.comment_text.errors %}
+            {{ message }}
+        {% endfor %}
+
+        <form action = "http://localhost:5000/comment" method = post>
+            <fieldset>
+                <legend> Comment Form</legend>
+                {{ form.hidden_tag() }}
+
+                <div style = font-size:20px; font-weight:bold;>
+                    {{ form.username.label }}<br>
+                    {{ form.username }}
+                    </br>
+
+                    {{ form.comment_text.label }}<br>
+                    {{ form.comment_text }}
+                    </br>
+
+                    {{form.submit }}
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>
