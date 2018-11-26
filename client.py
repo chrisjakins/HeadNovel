@@ -1,9 +1,46 @@
-from flask import Flask, render_template, request, flash
-from forms import PostForm
+from flask import Flask, render_template, request, flash, session, escape, redirect, url_for
+from forms import PostForm, CommentForm
 
 debug = True
 app = Flask(__name__)
 app.secret_key = 'dev key'
+
+@app.route('/')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return '''
+        <form method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+
+@app.route('/logout')
+def logout():
+    # removes username is someone is logged in
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+@app.route('/comment', methods = ['GET', 'POST'])
+def comment():
+    form = CommentForm()
+    if request.method == 'POST':
+        if form.validate() is False:
+            flash('Check required fields.')
+            return render_template('comment.html', form = form)
+        else:
+            # add to database
+            return render_template('success.html')
+    elif request.method == 'GET':
+        return render_template('comment.html', form = form)
 
 @app.route('/post', methods = ['GET', 'POST'])
 def post():
