@@ -1,29 +1,32 @@
-<!doctype html>
-<html>
-    <body>
-        <h2> Post Form</h2>
+{% extends 'base.html' %}
 
-        {% for message in form.comment_text.errors %}
-            {{ message }}
-        {% endfor %}
+{% block content %}
+<h2>{% block title %}Comment Form{% endblock %}</h2>
 
-        <form action = "http://localhost:5000/comment" method = post>
-            <fieldset>
-                <legend> Comment Form</legend>
-                {{ form.hidden_tag() }}
+{% for message in form.username.errors %}
+    {{ message }}
+{% endfor %}
 
-                <div style = font-size:20px; font-weight:bold;>
-                    {{ form.username.label }}<br>
-                    {{ form.username }}
-                    </br>
+{% for message in form.comment_text.errors %}
+    {{ message }}
+{% endfor %}
 
-                    {{ form.comment_text.label }}<br>
-                    {{ form.comment_text }}
-                    </br>
+<form action = "http://localhost:5000/comment" method = post>
+    <fieldset>
+        <legend> Comment Form</legend>
+        {{ form.hidden_tag() }}
 
-                    {{form.submit }}
-                </div>
-            </fieldset>
-        </form>
-    </body>
-</html>
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.username.label }}<br>
+            {{ form.username }}
+            </br>
+
+            {{ form.comment_text.label }}<br>
+            {{ form.comment_text }}
+            </br>
+
+            {{form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

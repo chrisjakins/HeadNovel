@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <div height=300px; text-align=center;>
+            <a href="/post">Add Post</a>
+            <a href="/comment">Add Comment</a>
+        </div>
+        {% block content %}
+        {% endblock  %}
+    </body>
+</html>

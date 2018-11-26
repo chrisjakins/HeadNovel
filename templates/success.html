@@ -1,7 +1,5 @@
-<!doctype html>
-<html>
-    <body>
-        <h2>Success!!!</h2>
-        <!-- Add a 'go back link' or something --!>
-    <body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Success!!!{% endblock %}</h2>
+{% endblock %}
