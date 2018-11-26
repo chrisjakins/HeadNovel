@@ -3,6 +3,10 @@
     <body>
         <h2>Post Form</h2>
 
+        {% for message in form.username.errors %}
+            {{ message }}
+        {% endfor %}
+
         {% for message in form.post_text.errors %}
             {{ message }}
         {% endfor %}

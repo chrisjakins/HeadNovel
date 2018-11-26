@@ -4,7 +4,7 @@ import datetime
 
 class PostForm(FlaskForm):
     # TODO 
-    # need a unique post ID
+    # need a unique post ID (can be abstracted to database class)
     post_text = wtforms.TextAreaField('Post',
         [wtforms.validators.DataRequired('Post field can not be empty.'),
          wtforms.validators.Length(max = 400)])
