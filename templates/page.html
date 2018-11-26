@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Page Form{% endblock %}</h2>
+
+{% for message in form.page_name.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.admin_username.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.category.errors %}
+    {{ message }}
+{% endfor %}
+    
+{% for message in form.description.errors %}
+    {{ message }}
+{% endfor %}
+    
+<form action = "http://localhost:5000/page" method = post>
+    <fieldset>
+        <legend>Page Form</legend>
+        {{ form.hidden_tag() }}
+
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.page_name.label }}<br>
+            {{ form.page_name }}
+            </br>
+
+            {{ form.admin_username.label }}<br>
+            {{ form.admin_username }}
+            </br>
+
+            {{ form.category.label }}<br>
+            {{ form.admin_username }}
+            </br>
+
+            {{ form.description.label }}<br>
+            {{ form.admin_username }}
+            </br>
+
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

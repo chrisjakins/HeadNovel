@@ -24,4 +24,5 @@ class Database:
     def populate(self):
         c = self.conn.cursor()
         for query in queries.random_insert_queries:
+            print('Executing: ', query)
             c.execute(query)

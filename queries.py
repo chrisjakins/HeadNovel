@@ -52,11 +52,9 @@ create_page_query = ('CREATE TABLE IF NOT EXISTS PAGE ('
     'page_id int NOT NULL,'
     'page_name varchar(128) NOT NULL,'
     'admin int NOT NULL,'
-    'page_image varchar(256),'
     'num_views int,'
     'category varchar(64),'
     'description varchar(256),'
-    'member_list int,'
     'PRIMARY KEY (page_id),'
     'FOREIGN KEY (admin) REFERENCES PROFILE(profile_id) );')
 
@@ -160,5 +158,48 @@ random_insert_queries = [
     "INSERT INTO profile "
     "VALUES ('Morihei', 'Ushiba', 'artofpeace',"
     "'aikido',19,'1999-04-19 19:19:19','8171919199',"
-    "'artofpeace@email.com','1919-04-19')"
+    "'artofpeace@email.com','1919-04-19')",
+
+    "INSERT INTO page "
+    "VALUES (0,'CSE3320 Database Group', 0,"
+    "0,'Professional','The group for the databases project')",
+
+    "INSERT INTO page "
+    "VALUES (1,'Cookie Club', 15,"
+    "0,'Organization','A club that loves to make cookies!')",
+    
+    "INSERT INTO page "
+    "VALUES (2,'Book Club', 3,"
+    "0,'Personal','Reading group every Sunday :)')",
+    
+    "INSERT INTO page "
+    "VALUES (3,'Chess Club', 8,"
+    "0,'Organization','Learn to play chess.')",
+    
+    "INSERT INTO page "
+    "VALUES (4,'Programming Club', 9,"
+    "0,'Organization','For all programmers, old and new!')",
+    
+    "INSERT INTO page "
+    "VALUES (5,'Anime Club', 12,"
+    "0,'Personal','Who is best girl? Come hang out and discuss!')",
+    
+    "INSERT INTO page "
+    "VALUES (6,'Linux Admins', 15,"
+    "0,'Personal','sudo rm')",
+    
+    "INSERT INTO page "
+    "VALUES (7,'Extreme Parkour Group', 19,"
+    "0,'Social','Let us go jump and stuff!')",
+    
+    "INSERT INTO page "
+    "VALUES (8,'Board Game Club', 1,"
+    "0,'Social','Like board games? This is the group for you!')",
+    
+    "INSERT INTO page "
+    "VALUES (9,'Computer Network Security Club', 7,"
+    "0,'Organization','TCP or UDP? Come network!')",
+
+    "INSERT INTO post "
+    "VALUES (0, 'Meeting today at 5pm', '2017-08-10 10:10:10',5, NULL)"
 ]

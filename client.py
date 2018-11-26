@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, session, escape, redirect, url_for
-from forms import PostForm, CommentForm, MessageForm, ProfileForm
+from forms import *
 
 debug = True
 app = Flask(__name__)
@@ -36,7 +36,7 @@ def logout():
 ###############################################################
 
 @app.route('/comment', methods = ['GET', 'POST'])
-def comment():
+def add_comment():
     form = CommentForm()
     if request.method == 'POST':
         if form.validate() is False:
@@ -51,7 +51,7 @@ def comment():
 ###############################################################
 
 @app.route('/post', methods = ['GET', 'POST'])
-def post():
+def add_post():
     form = PostForm()
     if request.method == 'POST':
         if form.validate() is False:
@@ -66,7 +66,7 @@ def post():
 ###############################################################
 
 @app.route('/message', methods = ['GET', 'POST'])
-def message():
+def add_message():
     form = MessageForm()
     if request.method == 'POST':
         if form.validate() is False:
@@ -81,7 +81,7 @@ def message():
 ###############################################################
 
 @app.route('/profile', methods = ['GET', 'POST'])
-def profile():
+def add_profile():
     form = ProfileForm()
     if request.method == 'POST':
         if form.validate() is False:
@@ -92,6 +92,21 @@ def profile():
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('profile.html', form = form)
+
+###############################################################
+
+@app.route('/page', methods = ['GET', 'POST'])
+def add_page():
+    form = PageForm()
+    if request.method == 'POST':
+        if form.validate() is False:
+            flash('Check required fields.')
+            return render_template('page.html', form = form)
+        else:
+            # add results to database here
+            return render_template('success.html')
+    elif request.method == 'GET':
+        return render_template('page.html', form = form)
 
 ###############################################################
 

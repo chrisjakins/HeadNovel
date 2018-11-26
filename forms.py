@@ -13,6 +13,7 @@ class PostForm(FlaskForm):
 
     username = wtforms.TextField('Username',
         [wtforms.validators.DataRequired('Username field can not be empty.')])
+
     current_time = datetime.datetime.now()
 
     submit = wtforms.SubmitField('Submit')
@@ -73,4 +74,21 @@ class ProfileForm(FlaskForm):
 
     current_time = datetime.datetime.now()                                     
  
+    submit = wtforms.SubmitField('Submit')
+
+class PageForm(FlaskForm):
+    # unique ID
+    page_name = wtforms.TextField('Page Name',
+        [wtforms.validators.DataRequired('Page name can not be empty.'),
+         wtforms.validators.Length(max = 128)])
+
+    admin_username = wtforms.TextField('Admin username',
+        [wtforms.validators.DataRequired('Admin field can not be empty.')])
+
+    category = wtforms.TextField('Category',
+        [wtforms.validators.Length(max = 64)])
+
+    description = wtforms.TextAreaField('Description',
+        [wtforms.validators.Length(max = 256)])
+
     submit = wtforms.SubmitField('Submit')
