@@ -54,9 +54,8 @@ class ProfileForm(FlaskForm):
     # TODO                                                                     
     # need a unique post ID (can be abstracted to database class)              
     password_text = wtforms.TextAreaField('Password',                                  
-        [wtforms.validators.DataRequired('Password field can not be empty.'),      
-         wtforms.validators.Length(max = 400)])                                
-                                                                               
+        [wtforms.validators.DataRequired('Password field can not be empty.')])
+
     username = wtforms.TextField('Username',                                   
         [wtforms.validators.DataRequired('Username field can not be empty.')])
 

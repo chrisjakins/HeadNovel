@@ -16,5 +16,12 @@ class Database:
         c.execute(queries.create_like_query)
         c.execute(queries.create_message_query)
         c.execute(queries.create_page_query)
+        self.populate()
         self.conn.commit()
         self.conn.close()
+
+
+    def populate(self):
+        c = self.conn.cursor()
+        for query in queries.random_insert_queries:
+            c.execute(query)
