@@ -77,9 +77,11 @@ def add_post():
             return render_template('post.html', form = form)
 
         else:
-            attr = 'post_id,text, time_stamp,text,poster_id,likes_list'
+            attr = 'post_id,time_stamp,text,poster_id,likes_list'
 
-            values = '150,\'' + curr_time() + '\','
+            post_id = db.get_next_id('post')
+
+            values = str(post_id) + ',\'' + curr_time() + '\','
             values += parse_dict(request.form)
             values += ',NULL'
 
@@ -120,11 +122,10 @@ def add_profile():
             flash('Check required fields.')
             return render_template('profile.html', form = form)
         else:
-            attr = 'f_name, l_name, u_name, password, profile_id, created_date, phone_no,emai, b_date'
+            attr = 'profile_id,created_date,u_name,password,email,f_name,l_name,phone_no,b_date'
 
-            values = '150,\'' + curr_time() + '\','
+            values = str(db.get_next_id('profile')) + ',\'' + curr_time() + '\','
             values += parse_dict(request.form)
-            values += ',NULL'
 
             db.insert_item('profile', attr, values)
             return render_template('success.html')
@@ -141,11 +142,11 @@ def add_page():
             flash('Check required fields.')
             return render_template('page.html', form = form)
         else:
-            attr = 'page_id,page_name,admin,num_views,category,description'
+            attr = 'page_id,page_name,admin,category,description,num_views'
 
-            values = '150,\'' + curr_time() + '\','
+            values = str(db.get_next_id('page')) + ','
             values += parse_dict(request.form)
-            values += ',NULL'
+            values += ',0'
             db.insert_item('page',attr , values)
             return render_template('success.html')
     elif request.method == 'GET':
@@ -157,13 +158,9 @@ def add_page():
 def get_page():
     form = GetPageForm()
     if request.method == 'POST':
-        # how to display results?
-        # results is a list of all the results returned
-        # here - results will only return 1 page
         results = db.get_item('*', 'page', 'page_id', str(request.form['page_id']))
         columns = ['page_id', 'page_name', 'admin', 'num_views', 'category', 'description']
 
-        print(results)
         return render_template('results.html', columns = columns, items = results)
 
     elif request.method == 'GET':
@@ -175,8 +172,6 @@ def get_page():
 def get_posts_by_account():
     form = GetPostsByAccountForm()
     if request.method == 'POST':
-        # results is a list of all posts returned by user given
-        # how do we display this
         user_id = db.get_item('profile_id', 'profile',
                               'u_name', str(request.form['username']))[0][0]
         page_id = db.get_item('page_id', 'page', 'admin', str(user_id))[0][0]

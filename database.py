@@ -30,6 +30,7 @@ class Database:
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
         query = queries.insert_generic_query % (table, attributes, values)
+        print('EXECUTING: ',    query)
         c.execute(query)
         conn.commit()
         conn.close()
@@ -50,3 +51,14 @@ class Database:
     # takes a username, returns the user_id for that username
     def get_user_id(self, username):
         return 10
+
+
+    def get_next_id(self, table):
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+        query = queries.count_query % (table)
+        c.execute(query)
+        result = int(c.fetchone()[0])
+        conn.commit()
+        conn.close()
+        return result
