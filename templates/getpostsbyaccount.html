@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Get Posts By Account Form{% endblock %}</h2>
+
+<form action = "http://localhost:5000/getpostsbyaccount" method = post>
+    <fieldset>
+        <legend>Get Posts By Account Form</legend>
+        {{ form.hidden_tag() }}
+
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.username.label }}<br>
+            {{ form.username }}
+            </br>
+
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

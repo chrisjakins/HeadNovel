@@ -94,3 +94,10 @@ class GetPageForm(FlaskForm):
     submit = wtforms.SubmitField('Submit')
 
 ###############################################################################
+
+class GetPostsByAccountForm(FlaskForm):
+    username = wtforms.TextField('username')
+
+    submit = wtforms.SubmitField('Submit')
+
+###############################################################################

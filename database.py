@@ -35,10 +35,10 @@ class Database:
         conn.close()
 
 
-    def get_item(self, table, attribute, value):
+    def get_item(self, selects, table, attribute, value):
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
-        query = queries.select_generic_query % (table, attribute)
+        query = queries.select_generic_query % (selects, table, attribute)
         args = (value,)
         c.execute(query, args)
         result = c.fetchall()
