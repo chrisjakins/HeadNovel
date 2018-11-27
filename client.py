@@ -101,9 +101,9 @@ def add_message():
             flash('Check required fields.')
             return render_template('message.html', form = form)
         else:
-            attr = 'sender_id,reciever_id,time_stamp,message_text,likes_list'
+            attr = 'time_stamp,receiver_id,sender_id,message_text,likes_list'
 
-            values = '150,\'' + curr_time() + '\','
+            values = '\'' + curr_time() + '\','
             values += parse_dict(request.form)
             values += ',NULL'
 

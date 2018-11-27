@@ -30,7 +30,7 @@ class Database:
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
         query = queries.insert_generic_query % (table, attributes, values)
-        print('EXECUTING: ',    query)
+        #print('EXECUTING: ',    query)
         c.execute(query)
         conn.commit()
         conn.close()
