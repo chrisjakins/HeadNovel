@@ -133,7 +133,10 @@ def get_page():
         # results is a list of all the results returned
         # here - results will only return 1 page
         results = db.get_item('*', 'page', 'page_id', str(request.form['page_id']))
-        return render_template('success.html')
+        columns = ['page_id', 'page_name', 'admin', 'num_views', 'category', 'description']
+
+        print(results)
+        return render_template('results.html', columns = columns, items = results)
 
     elif request.method == 'GET':
         return render_template('getpage.html', form = form)
@@ -150,7 +153,9 @@ def get_posts_by_account():
                               'u_name', str(request.form['username']))[0][0]
         page_id = db.get_item('page_id', 'page', 'admin', str(user_id))[0][0]
         results = db.get_item('*', 'post', 'poster_id', str(page_id))
-        return render_template('success.html')
+
+        columns = ['post_id', 'text', 'time_stap', 'poster_id', 'likes_list']
+        return render_template('results.html', columns = columns, items = results)
 
     elif request.method == 'GET':
         return render_template('getpostsbyaccount.html', form = form)

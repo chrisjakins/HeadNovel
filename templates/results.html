@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Results{% endblock %}</h2>
+
+<table>
+    <thead>
+    {%- for column in columns %}
+        <th>{{ column }}</th>
+    {%- endfor %}
+    </thead>
+
+    <tbody>
+        {%- for row in items %}
+        <tr>
+            <td>{{row}}</td>
+        </tr>
+        {%- endfor %}
+    </tbody>
+</table>
+{% endblock %}
