@@ -10,8 +10,8 @@ class PostForm(FlaskForm):
         [wtforms.validators.DataRequired('Post field can not be empty.'),
          wtforms.validators.Length(max = 400)])
 
-    username = wtforms.TextField('Username',
-        [wtforms.validators.DataRequired('Username field can not be empty.')])
+    page_id = wtforms.TextField('Page ID',
+        [wtforms.validators.DataRequired('Page ID field can not be empty.')])
 
     submit = wtforms.SubmitField('Submit')
 
@@ -64,6 +64,9 @@ class ProfileForm(FlaskForm):
 
     phoneNum = wtforms.TextField('Phone Number',                                   
         [wtforms.validators.DataRequired('Phone Number field can not be empty.')])
+
+    birthdate = wtforms.TextField('Birthdate',
+        [wtforms.validators.DataRequired('Birthdate field can not be empty.')])
 
     submit = wtforms.SubmitField('Submit')
 

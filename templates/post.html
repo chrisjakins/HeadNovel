@@ -3,7 +3,7 @@
 {% block content %}
 <h2>{% block title %}Post Form{% endblock %}</h2>
 
-{% for message in form.username.errors %}
+{% for message in form.page_id.errors %}
     {{ message }}
 {% endfor %}
 
@@ -21,8 +21,8 @@
             {{ form.post_text }}
             </br>
 
-            {{ form.username.label }}<br>
-            {{ form.username }}
+            {{ form.page_id.label }}<br>
+            {{ form.page_id }}
             </br>
 
             {{ form.submit }}

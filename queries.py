@@ -1,5 +1,7 @@
 # write all queries here
 
+count_query = ('SELECT COUNT(*) FROM %s')
+
 create_profile_query = ('CREATE TABLE IF NOT EXISTS profile ('
     'f_name varchar(20) NOT NULL,'
     'l_name varchar(20) NOT NULL,'

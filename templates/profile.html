@@ -27,6 +27,10 @@
     {{ message }}
 {% endfor %}
 
+{% for message in form.birthdate.errors %}
+    {{ message }}
+{% endfor %}
+
 <form action = "http://localhost:5000/profile" method = post>
     <fieldset>
         <legend>Profile Form</legend>
@@ -55,6 +59,10 @@
 
             {{ form.phoneNum.label }}<br>
             {{ form.phoneNum }}
+            </br> 
+
+            {{ form.birthdate.label }}<br>
+            {{ form.birthdate }}
             </br> 
 
             {{ form.submit }}
