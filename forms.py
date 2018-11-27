@@ -85,3 +85,12 @@ class PageForm(FlaskForm):
         [wtforms.validators.Length(max = 256)])
 
     submit = wtforms.SubmitField('Submit')
+
+###############################################################################
+
+class GetPageForm(FlaskForm):
+    page_id = wtforms.IntegerField('Page ID')
+
+    submit = wtforms.SubmitField('Submit')
+
+###############################################################################

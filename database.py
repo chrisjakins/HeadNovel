@@ -4,7 +4,6 @@ import queries
 class Database:
     
     def __init__(self):
-        # create a connection to the database
         self.db_name = 'headnovel.db'
 
     
@@ -35,5 +34,19 @@ class Database:
         conn.commit()
         conn.close()
 
+
+    def get_item(self, table, attribute, value):
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+        query = queries.select_generic_query % (table, attribute)
+        args = (value,)
+        c.execute(query, args)
+        result = c.fetchall()
+        conn.commit()
+        conn.close()
+        return result
+
+
+    # takes a username, returns the user_id for that username
     def get_user_id(self, username):
         return 10

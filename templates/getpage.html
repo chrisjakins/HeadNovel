@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Get Page Form{% endblock %}</h2>
+
+<form action = "http://localhost:5000/getpage" method = post>
+    <fieldset>
+        <legend>Get Page Form</legend>
+        {{ form.hidden_tag() }}
+
+        <div style = font-size:20px; font-weight:bold;>
+            {{ form.page_id.label }}<br>
+            {{ form.page_id }}
+            </br>
+
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

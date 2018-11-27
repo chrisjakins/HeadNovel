@@ -62,6 +62,11 @@ create_page_query = ('CREATE TABLE IF NOT EXISTS PAGE ('
 insert_generic_query = ('INSERT INTO %s (%s) '
     'VALUES (%s)')
 
+
+select_generic_query = ('SELECT * FROM %s '
+    'WHERE %s = ?')
+
+
 random_insert_queries = [
     "INSERT INTO profile "
     "VALUES ('Chris', 'Jakins', 'chrisjakins',"

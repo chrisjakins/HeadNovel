@@ -125,6 +125,21 @@ def add_page():
 
 ###############################################################
 
+@app.route('/getpage', methods = ['GET', 'POST'])
+def get_page():
+    form = GetPageForm()
+    if request.method == 'POST':
+        # how to display results?
+        # results is a list of all the results returned
+        # here - results will only return 1 page
+        results = db.get_item('page', 'page_id', str(request.form['page_id']))
+        return render_template('success.html')
+
+    elif request.method == 'GET':
+        return render_template('getpage.html', form = form)
+
+###############################################################
+
 # HELPERS
 
 def parse_dict(items):
