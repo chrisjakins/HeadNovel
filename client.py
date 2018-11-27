@@ -77,7 +77,7 @@ def add_post():
             return render_template('post.html', form = form)
 
         else:
-            attr = 'post_id,text, time_stamp,text,poster_id,likes_list'
+            attr = 'post_id,text, time_stamp,poster_id,likes_list'
 
             values = '150,\'' + curr_time() + '\','
             values += parse_dict(request.form)
@@ -120,7 +120,7 @@ def add_profile():
             flash('Check required fields.')
             return render_template('profile.html', form = form)
         else:
-            attr = 'f_name, l_name, u_name, password, profile_id, created_date, phone_no,emai, b_date'
+            attr = 'f_name, l_name, u_name, password, profile_id, created_date, phone_no,email, b_date'
 
             values = '150,\'' + curr_time() + '\','
             values += parse_dict(request.form)
@@ -133,6 +133,24 @@ def add_profile():
 
 ###############################################################
 
+@app.route('/delete_profile', methods = ['GET', 'POST'])
+def delete_profile():
+    form = ProfileForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        attr = 'profile_id'
+        
+        values = '150,\''
+        values += profile_delete(request.form)
+        values += ',NULL'
+
+#        flash('Entry deleted')
+        return render_template('delete_profile.html', form = form)
+    elif request.method == 'GET':
+        return render_template('delete_profile.html')
+
+
+
+###############################################################
 @app.route('/page', methods = ['GET', 'POST'])
 def add_page():
     form = PageForm()
@@ -185,6 +203,8 @@ def get_posts_by_account():
 
 ###############################################################
 
+
+
 # HELPERS
 
 def parse_dict(items):
@@ -197,6 +217,11 @@ def parse_dict(items):
 
     return values[:-1]
 
+def delete_profile(items):
+    values = ''
+    for items in request.form:
+        if item != 'csrf_token' and item != 'submit':
+            values += '\'' + request.form[item] + '\','
 
 def curr_time():
     time = datetime.datetime.now()

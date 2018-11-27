@@ -46,6 +46,11 @@ class Database:
         conn.close()
         return result
 
+    def delete_item(self, selects):
+#   Selects = profile_id
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+          
 
     # takes a username, returns the user_id for that username
     def get_user_id(self, username):
