@@ -63,7 +63,7 @@ insert_generic_query = ('INSERT INTO %s (%s) '
     'VALUES (%s)')
 
 
-select_generic_query = ('SELECT * FROM %s '
+select_generic_query = ('SELECT %s FROM %s '
     'WHERE %s = ?')
 
 

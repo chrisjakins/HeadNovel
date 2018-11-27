@@ -132,11 +132,28 @@ def get_page():
         # how to display results?
         # results is a list of all the results returned
         # here - results will only return 1 page
-        results = db.get_item('page', 'page_id', str(request.form['page_id']))
+        results = db.get_item('*', 'page', 'page_id', str(request.form['page_id']))
         return render_template('success.html')
 
     elif request.method == 'GET':
         return render_template('getpage.html', form = form)
+
+###############################################################
+
+@app.route('/getpostsbyaccount', methods = ['GET', 'POST'])
+def get_posts_by_account():
+    form = GetPostsByAccountForm()
+    if request.method == 'POST':
+        # results is a list of all posts returned by user given
+        # how do we display this
+        user_id = db.get_item('profile_id', 'profile',
+                              'u_name', str(request.form['username']))[0][0]
+        page_id = db.get_item('page_id', 'page', 'admin', str(user_id))[0][0]
+        results = db.get_item('*', 'post', 'poster_id', str(page_id))
+        return render_template('success.html')
+
+    elif request.method == 'GET':
+        return render_template('getpostsbyaccount.html', form = form)
 
 ###############################################################
 
