@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, session, escape, redir
 from forms import *
 from database import Database
 import datetime
+import sqlite3
 
 
 debug = True
@@ -12,11 +13,16 @@ db = Database()
 
 ###############################################################
 
-@app.route('/')
-def index():
-    if 'username' in session:
-        return 'Logged in as %s' % escape(session['username'])
-    return 'You are not logged in'
+@app.route('/list_users')
+def list_users():
+   
+   db.row_factory = sql.Row
+
+   cur = con.cursor()
+   cur.execute("select * from users")
+
+   rows = cur.fetchall();
+   return render_template("list_users.html", rows = rows)
 
 ###############################################################
 
@@ -36,7 +42,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    # removes username is someone is logged in
+    # removes username if someone is logged in
     session.pop('username', None)
     return redirect(url_for('index'))
 
@@ -50,7 +56,12 @@ def add_comment():
             flash('Check required fields.')
             return render_template('comment.html', form = form)
         else:
-            db.insert_item('comment', request.form)
+            attr = 'comment_id,time_stamp,comm_text,commentor_ID,likes_list'
+
+            values = '150,\'' + curr_time() + '\','
+            values += parse_dict(request.form)
+            values += ',NULL'
+            db.insert_item('comment', attr, values)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('comment.html', form = form)
@@ -66,7 +77,7 @@ def add_post():
             return render_template('post.html', form = form)
 
         else:
-            attr = 'post_id,time_stamp,text,poster_id,likes_list'
+            attr = 'post_id,text, time_stamp,text,poster_id,likes_list'
 
             values = '150,\'' + curr_time() + '\','
             values += parse_dict(request.form)
@@ -88,7 +99,13 @@ def add_message():
             flash('Check required fields.')
             return render_template('message.html', form = form)
         else:
-            db.insert_item('message', request.form)
+            attr = 'sender_id,reciever_id,time_stamp,message_text,likes_list'
+
+            values = '150,\'' + curr_time() + '\','
+            values += parse_dict(request.form)
+            values += ',NULL'
+
+            db.insert_item('message', attr, values)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('message.html', form = form)
@@ -103,7 +120,13 @@ def add_profile():
             flash('Check required fields.')
             return render_template('profile.html', form = form)
         else:
-            db.insert_item('profile', request.form)
+            attr = 'f_name, l_name, u_name, password, profile_id, created_date, phone_no,emai, b_date'
+
+            values = '150,\'' + curr_time() + '\','
+            values += parse_dict(request.form)
+            values += ',NULL'
+
+            db.insert_item('profile', attr, values)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('profile.html', form = form)
@@ -118,7 +141,12 @@ def add_page():
             flash('Check required fields.')
             return render_template('page.html', form = form)
         else:
-            db.insert_item('page', request.form)
+            attr = 'page_id,page_name,admin,num_views,category,description'
+
+            values = '150,\'' + curr_time() + '\','
+            values += parse_dict(request.form)
+            values += ',NULL'
+            db.insert_item('page',attr , values)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('page.html', form = form)
