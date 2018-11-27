@@ -59,6 +59,9 @@ create_page_query = ('CREATE TABLE IF NOT EXISTS PAGE ('
     'FOREIGN KEY (admin) REFERENCES PROFILE(profile_id) );')
 
 
+insert_generic_query = ('INSERT INTO %s (%s) '
+    'VALUES (%s)')
+
 random_insert_queries = [
     "INSERT INTO profile "
     "VALUES ('Chris', 'Jakins', 'chrisjakins',"
@@ -498,5 +501,5 @@ random_insert_queries = [
     "VALUES (98, 'Meeting in eight days at 5pm', '2017-08-02 10:10:10',9, NULL)",
 
     "INSERT INTO post "
-    "VALUES (99, 'Meeting in nine days at 5pm', '2017-08-01 10:10:10',9, NULL)",
+    "VALUES (99, 'Meeting in nine days at 5pm', '2017-08-01 10:10:10',9, NULL)"
 ]

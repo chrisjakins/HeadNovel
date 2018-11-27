@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request, flash, session, escape, redirect, url_for
 from forms import *
+from database import Database
+import datetime
+
 
 debug = True
 app = Flask(__name__)
 app.secret_key = 'dev key'
+db = Database()
+
+
 ###############################################################
+
 @app.route('/')
 def index():
     if 'username' in session:
@@ -43,7 +50,7 @@ def add_comment():
             flash('Check required fields.')
             return render_template('comment.html', form = form)
         else:
-            # add to database
+            db.insert_item('comment', request.form)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('comment.html', form = form)
@@ -57,9 +64,17 @@ def add_post():
         if form.validate() is False:
             flash('Check required fields.')
             return render_template('post.html', form = form)
+
         else:
-            # add results to database here
+            attr = 'post_id,time_stamp,text,poster_id,likes_list'
+
+            values = '150,\'' + curr_time() + '\','
+            values += parse_dict(request.form)
+            values += ',NULL'
+
+            db.insert_item('post', attr, values)
             return render_template('success.html')
+
     elif request.method == 'GET':
         return render_template('post.html', form = form)
 
@@ -73,7 +88,7 @@ def add_message():
             flash('Check required fields.')
             return render_template('message.html', form = form)
         else:
-            # add results to database here
+            db.insert_item('message', request.form)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('message.html', form = form)
@@ -88,7 +103,7 @@ def add_profile():
             flash('Check required fields.')
             return render_template('profile.html', form = form)
         else:
-            # add results to database here
+            db.insert_item('profile', request.form)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('profile.html', form = form)
@@ -103,12 +118,30 @@ def add_page():
             flash('Check required fields.')
             return render_template('page.html', form = form)
         else:
-            # add results to database here
+            db.insert_item('page', request.form)
             return render_template('success.html')
     elif request.method == 'GET':
         return render_template('page.html', form = form)
 
 ###############################################################
+
+# HELPERS
+
+def parse_dict(items):
+    values = ''
+    for item in request.form:
+        if item != 'csrf_token' and item != 'submit':
+            values += '\'' + request.form[item] + '\','
+        elif item == 'username':
+            values += str(db.get_user_id(request.form[item])) + ','
+
+    return values[:-1]
+
+
+def curr_time():
+    time = datetime.datetime.now()
+    return str(time.strftime('%Y-%m-%d %H:%M:%S'))
+
 
 if __name__ == '__main__':
     app.run(debug = debug)

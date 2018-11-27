@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
 import wtforms
-import datetime
 
 ###############################################################################
 
@@ -14,8 +13,6 @@ class PostForm(FlaskForm):
     username = wtforms.TextField('Username',
         [wtforms.validators.DataRequired('Username field can not be empty.')])
 
-    current_time = datetime.datetime.now()
-
     submit = wtforms.SubmitField('Submit')
 
 ###############################################################################
@@ -28,8 +25,6 @@ class CommentForm(FlaskForm):
          wtforms.validators.Length(max = 400)])
     username = wtforms.TextField('Username',
         [wtforms.validators.DataRequired('Username field can not be empty.')])
-
-    current_time = datetime.datetime.now()
 
     submit = wtforms.SubmitField('Submit')
 
@@ -45,8 +40,6 @@ class MessageForm(FlaskForm):
     receiver_username = wtforms.TextField('Receiver Username',
         [wtforms.validators.DataRequired('Receiver Username field can not be empty.')])
  
-    current_time = datetime.datetime.now()
-
     submit = wtforms.SubmitField('Submit')
 
 ###############################################################################
@@ -72,9 +65,9 @@ class ProfileForm(FlaskForm):
     phoneNum = wtforms.TextField('Phone Number',                                   
         [wtforms.validators.DataRequired('Phone Number field can not be empty.')])
 
-    current_time = datetime.datetime.now()                                     
- 
     submit = wtforms.SubmitField('Submit')
+
+###############################################################################
 
 class PageForm(FlaskForm):
     # unique ID

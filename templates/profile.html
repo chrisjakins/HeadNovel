@@ -11,7 +11,23 @@
     {{ message }}
 {% endfor %}
     
-<form action = "http://localhost:5000/profile" method = profile>
+{% for message in form.firstName.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.email.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.lastName.errors %}
+    {{ message }}
+{% endfor %}
+
+{% for message in form.phoneNum.errors %}
+    {{ message }}
+{% endfor %}
+
+<form action = "http://localhost:5000/profile" method = post>
     <fieldset>
         <legend>Profile Form</legend>
         {{ form.hidden_tag() }}
