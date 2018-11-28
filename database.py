@@ -47,10 +47,13 @@ class Database:
         conn.close()
         return result
 
-    def delete_item(self, selects):
+    def delete_item(self, value):
 #   Selects = profile_id
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
+        c.execute('DELETE FROM ProfileForm WHERE profile_id =?''', (value,))
+        conn.commit()
+        conn.close()
           
 
     # takes a username, returns the user_id for that username

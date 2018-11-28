@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{% block title %}Profile Deletion Form{% endblock %}</h2>
+
+<form action = "http//localhost:5000/delete_profile" method = post>
+    <fieldset>
+        <legend>Profile Deletion Form</legend>
+        {{ form.hidden_tag() }}
+
+        <div style = font-size:20px; fornt-weight:bold;>
+            {{ form.profile_id.label }}<br>
+            {{ form.profile_id }}
+            </br>
+
+            {{ form.submit }}
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
