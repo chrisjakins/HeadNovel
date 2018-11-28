@@ -56,6 +56,15 @@ class Database:
         conn.commit()
         conn.close()
           
+    def update_page(self,page_id,page_name,admin,category,description):
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+        c.execute('UPDATE PAGE SET page_name = ?, admin = ?, category = ?,'
+                  'description = ? WHERE page_id = ?',
+                 (page_name,admin,category,description,page_id))                                          
+        conn.commit()
+        conn.close()
+
 
     # takes a username, returns the user_id for that username
     def get_user_id(self, username):

@@ -171,6 +171,22 @@ def add_page():
         return render_template('page.html', form = form)
 
 ###############################################################
+@app.route('/updatepage', methods = ['GET', 'POST'])
+def update_page():
+ 
+    if request.method == 'POST':
+        page_id = request.form.get('page_id')
+        page_name = request.form.get('page_name')
+        admin = request.form.get('admin')
+        category = request.form.get('category')
+        description = request.form.get('description')
+        print(page_id)
+        db.update_page(page_id,page_name,admin,category,description)
+        return render_template('success.html')
+    elif request.method == 'GET':
+        return render_template('updatepage.html')
+
+###############################################################
 
 @app.route('/getpage', methods = ['GET', 'POST'])
 def get_page():

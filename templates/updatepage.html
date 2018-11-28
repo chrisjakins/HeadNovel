@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+    <body>
+        <form action = 'updatepage' method = 'post'>
+            <center><br><input placeholder='Page ID' name='page_id' required = 'required'><br>
+            <input placeholder='Page Name' name='page_name' required = 'required'><br>
+            <input placeholder='Admin username' name='admin' required = 'required'><br>
+            <input placeholder='Category' name='category' required = 'required'><br>
+            <input placeholder='Description' name='description' required = 'required'><br>
+            <input type='submit' value='Submit'>
+            </center>
+        </form>
+    <body>
+</html>
+{% endblock  %}
