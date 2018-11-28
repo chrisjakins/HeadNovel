@@ -68,6 +68,7 @@ insert_generic_query = ('INSERT INTO %s (%s) '
 select_generic_query = ('SELECT %s FROM %s '
     'WHERE %s = ?')
 
+delete_profile_query = ('DELETE FROM profile where profile_id = %d')
 
 random_insert_queries = [
     "INSERT INTO profile "

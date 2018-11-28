@@ -3,7 +3,11 @@
 {% block content %}
 <h2>{% block title %}Profile Deletion Form{% endblock %}</h2>
 
-<form action = "http//localhost:5000/delete_profile" method = post>
+{% for message in form.profile_id.errors %}
+    {{ message }}
+{% endfor %}
+
+<form action = "http://localhost:5000/delete_profile" method = post>
     <fieldset>
         <legend>Profile Deletion Form</legend>
         {{ form.hidden_tag() }}

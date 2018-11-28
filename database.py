@@ -47,11 +47,12 @@ class Database:
         conn.close()
         return result
 
-    def delete_item(self, value):
+    def delete_profile(self, selects,table):
 #   Selects = profile_id
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
-        c.execute('DELETE FROM ProfileForm WHERE profile_id =?''', (value,))
+        query = queries.delete_profile_query % (table)
+        c.execute(query)
         conn.commit()
         conn.close()
           

@@ -76,9 +76,8 @@ class ProfileForm(FlaskForm):
 ###############################################################################
 
 class Delete_Profile(FlaskForm):
-    profile_id = wtforms.IntegerField('Profile Name',
-                 [wtforms.validators.DataRequired('Profile id can not be empty'),
-                  wtforms.validators.Length(max = 128)])
+    profile_id = wtforms.IntegerField('Profile ID',
+                 [wtforms.validators.DataRequired('Profile id can not be empty')])
 
     submit = wtforms.SubmitField('Submit')
 

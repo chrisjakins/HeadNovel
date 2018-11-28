@@ -77,11 +77,7 @@ def add_post():
             return render_template('post.html', form = form)
 
         else:
-            <<<<<<< HEAD
-            attr = 'post_id,text, time_stamp,poster_id,likes_list'
-            =======
             attr = 'post_id,time_stamp,text,poster_id,likes_list'
-            >>>>>>> 244dc5484f583ab82da0e13071919ac384411798
 
             post_id = db.get_next_id('post')
 
@@ -126,11 +122,7 @@ def add_profile():
             flash('Check required fields.')
             return render_template('profile.html', form = form)
         else:
-    <<<<<<< HEAD
-            attr = 'f_name, l_name, u_name, password, profile_id, created_date, phone_no,email, b_date'
-    =======
             attr = 'profile_id,created_date,u_name,password,email,f_name,l_name,phone_no,b_date'
-    >>>>>>> 244dc5484f583ab82da0e13071919ac384411798
 
             values = str(db.get_next_id('profile')) + ',\'' + curr_time() + '\','
             values += parse_dict(request.form)
@@ -145,13 +137,17 @@ def add_profile():
 @app.route('/delete_profile', methods = ['GET', 'POST'])
 def delete_profile():
     form = Delete_Profile()
-    if request.method == 'POST' and form.validate_on_submit():
-        request.form['profile_id']
-        search = db.delete_profile('profile_id')
-        flash('Entry deleted')
-        return render_template('delete_profile.html', form = form)
+    if request.method == 'POST':
+        if form.validate() is False:
+            flash('Check required fields.')
+            return render_template('delete_profile.html', form = form)
+        else:
+            profile_id = int(request.form['profile_id'][0][0])
+            db.delete_profile('profile',profile_id)
+            flash('Entry deleted')
+            return render_template('success.html')
     elif request.method == 'GET':
-        return render_template('delete_profile.html')
+        return render_template('delete_profile.html', form = form)
 
 
 
