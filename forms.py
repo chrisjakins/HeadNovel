@@ -37,9 +37,12 @@ class MessageForm(FlaskForm):
         [wtforms.validators.DataRequired('Message field can not be empty.'),
          wtforms.validators.Length(max = 400)])
  
-    receiver_username = wtforms.TextField('Receiver Username',
+    receiver_id = wtforms.TextField('Receiver ID',
         [wtforms.validators.DataRequired('Receiver Username field can not be empty.')])
  
+    sender_id = wtforms.TextField('Sender ID',
+        [wtforms.validators.DataRequired('Receiver Username field can not be empty.')])
+
     submit = wtforms.SubmitField('Submit')
 
 ###############################################################################

@@ -3,7 +3,11 @@
 {% block content %}
 <h2>{% block title %}Message Form{% endblock %}</h2>
  
-{% for message in form.receiver_username.errors %}
+{% for message in form.receiver_id.errors %}
+    {{ message }}
+{% endfor %}
+ 
+{% for message in form.sender_id.errors %}
     {{ message }}
 {% endfor %}
  
@@ -11,16 +15,20 @@
     {{ message }}
 {% endfor %}
  
-<form action = "http://localhost:5000/message" method = message>
+<form action = "http://localhost:5000/message" method = post>
     <fieldset>
         <legend>Message Form</legend>
         {{ form.hidden_tag() }}
  
         <div style = font-size:20px; font-weight:bold;>
-            {{ form.receiver_username.label }}<br>
-            {{ form.receiver_username }}
+            {{ form.receiver_id.label }}<br>
+            {{ form.receiver_id }}
             </br>
  
+            {{ form.sender_id.label }}<br>
+            {{ form.sender_id }}
+            </br>
+
             {{ form.message_text.label }}<br>
             {{ form.message_text }}
             </br>
