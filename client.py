@@ -171,6 +171,7 @@ def add_page():
         return render_template('page.html', form = form)
 
 ###############################################################
+
 @app.route('/updatepage', methods = ['GET', 'POST'])
 def update_page():
  
@@ -180,11 +181,21 @@ def update_page():
         admin = request.form.get('admin')
         category = request.form.get('category')
         description = request.form.get('description')
-        print(page_id)
         db.update_page(page_id,page_name,admin,category,description)
         return render_template('success.html')
     elif request.method == 'GET':
         return render_template('updatepage.html')
+
+###############################################################
+
+@app.route('/listall', methods = ['GET'])
+def list_all():
+    columns = ["test"]
+    if request.method == 'GET':
+        results = db.get_all()
+
+    return render_template('results.html', columns = columns, items = results)
+
 
 ###############################################################
 

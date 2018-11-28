@@ -47,8 +47,22 @@ class Database:
         conn.close()
         return result
 
+    def get_all(self):
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+
+        results = []
+        for query in queries.get_all_query:
+            c.execute(query)
+            for item in c.fetchall():
+                results.append(item)
+    
+        conn.commit()
+        conn.close()
+        return results
+
     def delete_profile(self, selects,table):
-#   Selects = profile_id
+        #   Selects = profile_id
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()
         query = queries.delete_profile_query % (table)
@@ -61,14 +75,9 @@ class Database:
         c = conn.cursor()
         c.execute('UPDATE PAGE SET page_name = ?, admin = ?, category = ?,'
                   'description = ? WHERE page_id = ?',
-                 (page_name,admin,category,description,page_id))                                          
+        (page_name,admin,category,description,page_id))                                          
         conn.commit()
         conn.close()
-
-
-    # takes a username, returns the user_id for that username
-    def get_user_id(self, username):
-        return 10
 
 
     def get_next_id(self, table):
